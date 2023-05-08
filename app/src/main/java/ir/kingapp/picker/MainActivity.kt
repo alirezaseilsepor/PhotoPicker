@@ -2,6 +2,7 @@ package ir.kingapp.picker
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import coil.load
 import ir.kingapp.photopicker.PhotoPickerDialog
 import ir.kingapp.picker.databinding.ActivityMainBinding
 
@@ -12,11 +13,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val a: PhotoPickerDialog = PhotoPickerDialog.Builder()
-            .maxSelectSize(5)
-            .crop()
-            .compress(0)
-            .build()
-        a.show(supportFragmentManager, null)
+
+        binding.btnOpen.setOnClickListener {
+            val a: PhotoPickerDialog = PhotoPickerDialog.Builder()
+                .maxSelectSize(3)
+                .crop()
+                .compress(80)
+                .onSelectListener {
+                    binding.image1.load(it[0].uri)
+                    binding.image2.load(it[1].uri)
+                    binding.image3.load(it[2].uri)
+                }
+                .build()
+            a.show(supportFragmentManager, null)
+        }
+
     }
 }

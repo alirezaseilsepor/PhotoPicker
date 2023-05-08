@@ -116,18 +116,29 @@ class PhotoPickerDialog private constructor(
 
     private fun clickConfirm() {
         if (isCacheCropEnabled) {
-            cropPhotoItems()
+            cropPhotoItems(0)
         } else if (isCacheCompressEnabled) {
             compressPhotoItems()
-        } else{
+        } else {
             onSelectListener?.invoke(selectedItems)
             safeDismiss()
         }
     }
 
-    private fun cropPhotoItems() {
-        isCacheCropEnabled = false
-        clickConfirm()
+
+    private fun cropPhotoItems(position: Int) {
+        val photoItem = selectedItems.getOrNull(position)
+        if (photoItem != null) {
+            val cropDialog = CropDialog(photoItem)
+            cropDialog.onCropListener = {
+                selectedItems[position] = it
+                cropPhotoItems(position + 1)
+            }
+            cropDialog.show(childFragmentManager, null)
+        } else {
+            isCacheCropEnabled = false
+            clickConfirm()
+        }
     }
 
     private fun compressPhotoItems() {
