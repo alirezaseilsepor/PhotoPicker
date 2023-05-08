@@ -13,6 +13,7 @@ import app.king.mylibrary.ktx.safeDismiss
 import app.king.mylibrary.ktx.setOnSafeClickListener
 import app.king.mylibrary.ktx.setSafeScrollListener
 import app.king.mylibrary.util.EndlessRecyclerViewScrollListener
+import com.canhub.cropper.CropImageOptions
 import com.permissionx.guolindev.PermissionX
 import com.skydoves.powermenu.CustomPowerMenu
 import com.skydoves.powermenu.MenuAnimation
@@ -23,11 +24,11 @@ import java.util.Locale
 import java.util.Vector
 
 
+@Suppress("CanBeParameter")
 class PhotoPickerDialog private constructor(
     private val maxSelectSize: Int,
     private val isCropEnabled: Boolean,
-    private val cropWidthRatio: Int,
-    private val cropHeightRatio: Int,
+    private val cropImageOptions: CropImageOptions,
     private val isCompressEnabled: Boolean,
     private val compressQuality: Int,
     private val compressFormat: Bitmap.CompressFormat,
@@ -72,7 +73,7 @@ class PhotoPickerDialog private constructor(
                 PermissionX.init(this)!!.permissions(Manifest.permission.READ_EXTERNAL_STORAGE)
             }
         permissionX
-            .onExplainRequestReason { scope, deniedList ->
+            .onExplainRequestReason { _, _ ->
                 /* scope.showRequestReasonDialog(
                      deniedList,
                      getString(R.string.permission_request_title),
@@ -129,7 +130,7 @@ class PhotoPickerDialog private constructor(
     private fun cropPhotoItems(position: Int) {
         val photoItem = selectedItems.getOrNull(position)
         if (photoItem != null) {
-            val cropDialog = CropDialog(photoItem)
+            val cropDialog = CropDialog(photoItem, cropImageOptions)
             cropDialog.onCropListener = {
                 selectedItems[position] = it
                 cropPhotoItems(position + 1)
@@ -208,28 +209,16 @@ class PhotoPickerDialog private constructor(
         private var onSelectListener: Click<ArrayList<PhotoItem>>? = null
         private var maxSelectSize: Int = 1
         private var isCropEnabled: Boolean = false
-        private var cropWidthRatio: Int = -1
-        private var cropHeightRatio: Int = -1
+        private var cropImageOptions: CropImageOptions = CropImageOptions()
         private var isCompressEnabled: Boolean = false
         private var compressQuality: Int = 100
         private var compressFormat: Bitmap.CompressFormat = Bitmap.CompressFormat.JPEG
 
         fun maxSelectSize(size: Int): Builder = apply { this.maxSelectSize = size }
 
-        fun crop(): Builder = apply {
+        fun crop(options: CropImageOptions = cropImageOptions): Builder = apply {
             this.isCropEnabled = true
-        }
-
-        fun crop(ratio: Int): Builder = apply {
-            this.isCropEnabled = true
-            this.cropWidthRatio = ratio
-            this.cropHeightRatio = ratio
-        }
-
-        fun crop(widthRatio: Int, heightRatio: Int): Builder = apply {
-            this.isCropEnabled = true
-            this.cropWidthRatio = widthRatio
-            this.cropHeightRatio = heightRatio
+            this.cropImageOptions = options
         }
 
         fun compress(
@@ -252,12 +241,11 @@ class PhotoPickerDialog private constructor(
             return PhotoPickerDialog(
                 maxSelectSize,
                 isCropEnabled,
-                cropWidthRatio,
-                cropHeightRatio,
+                cropImageOptions,
                 isCompressEnabled,
                 compressQuality,
                 compressFormat,
-                onSelectListener
+                onSelectListener,
             )
         }
     }

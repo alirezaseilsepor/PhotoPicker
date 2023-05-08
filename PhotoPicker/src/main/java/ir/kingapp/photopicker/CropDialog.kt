@@ -13,11 +13,13 @@ import androidx.fragment.app.DialogFragment
 import app.king.mylibrary.ktx.Click
 import app.king.mylibrary.ktx.safeDismiss
 import app.king.mylibrary.ktx.setOnSafeClickListener
+import com.canhub.cropper.CropImageOptions
 import ir.kingapp.photopicker.databinding.DialogCropBinding
 import java.io.File
 
 class CropDialog(
     private val photoItem: PhotoItem,
+    private val cropImageOptions: CropImageOptions,
 ) : DialogFragment() {
 
     private var binding: DialogCropBinding? = null
@@ -25,6 +27,7 @@ class CropDialog(
 
     private fun setup() {
         binding!!.apply {
+            cropImageView.setImageCropOptions(cropImageOptions)
             cropImageView.setImageUriAsync(photoItem.uri)
             btnCrop.setOnSafeClickListener {
                 btnCrop.isEnabled = false
