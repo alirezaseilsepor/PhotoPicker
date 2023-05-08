@@ -36,7 +36,7 @@ class CropDialog(
             cropImageView.setOnCropImageCompleteListener { _, result ->
                 if (result.isSuccessful) {
                     val uri = result.originalUri!!
-                    val path = result.getUriFilePath(requireContext(),true)!!
+                    val path = result.getUriFilePath(requireContext(), true)!!
                     val length = File(path).length().toString()
                     val item = PhotoItem(
                         photoItem.id,
