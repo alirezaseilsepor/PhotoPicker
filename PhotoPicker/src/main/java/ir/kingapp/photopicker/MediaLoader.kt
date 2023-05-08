@@ -50,7 +50,7 @@ object MediaLoader {
                     val dateTaken = it.getLongOrNull(dateTakenColumn)
                     val dateAdded = it.getLong(dateAddColumn)
                     val path = it.getString(pathColumn)
-                    val folder = it.getStringOrNull(folderColumn) ?: context.getString(R.string.without_name)
+                    val folder = it.getStringOrNull(folderColumn) ?: context.getString(R.string.photo_picker_without_name)
                     val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
                     val originalDate = dateTaken ?: dateAdded
 

@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Picker</string>
+
+    <string name="photo_picker_cancel">بی خیال</string>
+    <string name="photo_picker_crop">برش</string>
+    <string name="photo_picker_ok">باشه</string>
+    <string name="photo_picker_permission_request_title">Core fundamental are based on these permissions</string>
+    <string name="photo_picker_permission_forward_setting">You need to allow necessary permissions in Settings manually</string>
+    <string name="photo_picker_all_folder">همه عکس ها</string>
+    <string name="photo_picker_select">انتخاب</string>
+    <string name="photo_picker_without_name">بدون نام</string>
+
+
 </resources>

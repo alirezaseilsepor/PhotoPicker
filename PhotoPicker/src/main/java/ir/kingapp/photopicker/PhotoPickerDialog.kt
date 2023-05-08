@@ -84,9 +84,9 @@ class PhotoPickerDialog private constructor(
             .onForwardToSettings { scope, deniedList ->
                 scope.showForwardToSettingsDialog(
                     deniedList,
-                    getString(R.string.permission_forward_setting),
-                    getString(R.string.ok),
-                    getString(R.string.cancel)
+                    getString(R.string.photo_picker_permission_forward_setting),
+                    getString(R.string.photo_picker_ok),
+                    getString(R.string.photo_picker_cancel)
                 )
             }
         permissionX
@@ -175,7 +175,7 @@ class PhotoPickerDialog private constructor(
 
     private fun setListFolder() {
         val listFolderPhotoItem = ArrayList<String>()
-        listFolderPhotoItem.add(requireContext().getString(R.string.all_folder))
+        listFolderPhotoItem.add(requireContext().getString(R.string.photo_picker_all_folder))
         val distinctList = listPhotoItem
             .map { it.folderName }
             .distinct()

@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:padding="8dp"
-        android:text="@string/cancel"
+        android:text="@string/photo_picker_cancel"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
