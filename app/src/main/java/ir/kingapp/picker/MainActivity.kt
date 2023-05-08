@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         val a: PhotoPickerDialog = PhotoPickerDialog.Builder()
             .maxSelectSize(5)
             .crop()
-            .compress()
+            .compress(0)
             .build()
         a.show(supportFragmentManager, null)
     }

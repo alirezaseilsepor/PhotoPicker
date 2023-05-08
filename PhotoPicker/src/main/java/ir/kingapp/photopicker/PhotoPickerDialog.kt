@@ -2,10 +2,13 @@ package ir.kingapp.photopicker
 
 
 import android.Manifest
+import android.graphics.Bitmap
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.IntRange
 import androidx.lifecycle.lifecycleScope
+import app.king.mylibrary.ktx.Click
 import app.king.mylibrary.ktx.safeDismiss
 import app.king.mylibrary.ktx.setOnSafeClickListener
 import app.king.mylibrary.ktx.setSafeScrollListener
@@ -27,12 +30,17 @@ class PhotoPickerDialog private constructor(
     private val cropHeightRatio: Int,
     private val isCompressEnabled: Boolean,
     private val compressQuality: Int,
+    private val compressFormat: Bitmap.CompressFormat,
+    private val onSelectListener: Click<ArrayList<PhotoItem>>?,
 ) : BaseDialogPicker<DialogPhotoPickerBinding>() {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> DialogPhotoPickerBinding
         get() = DialogPhotoPickerBinding::inflate
 
+    private var isCacheCropEnabled = isCropEnabled
+    private var isCacheCompressEnabled = isCompressEnabled
 
+    private var selectedItems = ArrayList<PhotoItem>()
     private val listPhotoItem = Vector<PhotoItem>()
     private var powerMenu: CustomPowerMenu<String, FolderMenuAdapter>? = null
     private val photoPickerAdapter = PhotoPickerAdapter(maxSelectSize)
@@ -65,12 +73,12 @@ class PhotoPickerDialog private constructor(
             }
         permissionX
             .onExplainRequestReason { scope, deniedList ->
-               /* scope.showRequestReasonDialog(
-                    deniedList,
-                    getString(R.string.permission_request_title),
-                    getString(R.string.ok),
-                    getString(R.string.cancel)
-                )*/
+                /* scope.showRequestReasonDialog(
+                     deniedList,
+                     getString(R.string.permission_request_title),
+                     getString(R.string.ok),
+                     getString(R.string.cancel)
+                 )*/
             }
             .onForwardToSettings { scope, deniedList ->
                 scope.showForwardToSettingsDialog(
@@ -89,8 +97,9 @@ class PhotoPickerDialog private constructor(
     private fun showMedia() {
         binding.recyclerView.itemAnimator = null
         binding.recyclerView.adapter = photoPickerAdapter
-        photoPickerAdapter.selectedItemsListener = { selecteList ->
-            binding.btnConfirm.isEnabled = selecteList.isNotEmpty()
+        photoPickerAdapter.selectedItemsListener = { selectedList ->
+            selectedItems = selectedList
+            binding.btnConfirm.isEnabled = selectedList.isNotEmpty()
         }
         binding.recyclerView.setSafeScrollListener(endlessScrollListener)
         if (photoPickerAdapter.currentList.isEmpty())
@@ -98,6 +107,44 @@ class PhotoPickerDialog private constructor(
 
         binding.tvFolder.setOnSafeClickListener {
             powerMenu?.showAsDropDown(binding.tvFolder)
+        }
+
+        binding.btnConfirm.setOnSafeClickListener {
+            clickConfirm()
+        }
+    }
+
+    private fun clickConfirm() {
+        if (isCacheCropEnabled) {
+            cropPhotoItems()
+        } else if (isCacheCompressEnabled) {
+            compressPhotoItems()
+        } else{
+            onSelectListener?.invoke(selectedItems)
+            safeDismiss()
+        }
+    }
+
+    private fun cropPhotoItems() {
+        isCacheCropEnabled = false
+        clickConfirm()
+    }
+
+    private fun compressPhotoItems() {
+        lifecycleScope.launch {
+            val list = ArrayList<PhotoItem>()
+            selectedItems.forEach {
+                val compressItem = CompressManager.compress(
+                    requireContext(),
+                    it,
+                    compressQuality,
+                    compressFormat
+                )
+                list.add(compressItem)
+            }
+            selectedItems = list
+            isCacheCompressEnabled = false
+            clickConfirm()
         }
     }
 
@@ -147,12 +194,14 @@ class PhotoPickerDialog private constructor(
 
 
     class Builder {
+        private var onSelectListener: Click<ArrayList<PhotoItem>>? = null
         private var maxSelectSize: Int = 1
         private var isCropEnabled: Boolean = false
         private var cropWidthRatio: Int = -1
         private var cropHeightRatio: Int = -1
         private var isCompressEnabled: Boolean = false
         private var compressQuality: Int = 100
+        private var compressFormat: Bitmap.CompressFormat = Bitmap.CompressFormat.JPEG
 
         fun maxSelectSize(size: Int): Builder = apply { this.maxSelectSize = size }
 
@@ -172,10 +221,21 @@ class PhotoPickerDialog private constructor(
             this.cropHeightRatio = heightRatio
         }
 
-        fun compress(quality: Int = 100): Builder = apply {
-            this.isCompressEnabled = true
-            this.compressQuality = quality
-        }
+        fun compress(
+            @IntRange(from = 0, to = 100) quality: Int,
+            format: Bitmap.CompressFormat = compressFormat,
+        ): Builder =
+            apply {
+                this.isCompressEnabled = true
+                this.compressQuality = quality
+                this.compressFormat = format
+            }
+
+        fun onSelectListener(onSelectListener: Click<ArrayList<PhotoItem>>): Builder =
+            apply {
+                this.onSelectListener = onSelectListener
+            }
+
 
         fun build(): PhotoPickerDialog {
             return PhotoPickerDialog(
@@ -184,7 +244,9 @@ class PhotoPickerDialog private constructor(
                 cropWidthRatio,
                 cropHeightRatio,
                 isCompressEnabled,
-                compressQuality
+                compressQuality,
+                compressFormat,
+                onSelectListener
             )
         }
     }
