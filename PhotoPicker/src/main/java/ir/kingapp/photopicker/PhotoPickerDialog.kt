@@ -214,7 +214,9 @@ class PhotoPickerDialog private constructor(
         private var compressQuality: Int = 100
         private var compressFormat: Bitmap.CompressFormat = Bitmap.CompressFormat.JPEG
 
-        fun maxSelectSize(size: Int): Builder = apply { this.maxSelectSize = size }
+        fun maxSelectSize(@IntRange(from = 0, to = 100) size: Int): Builder = apply {
+            this.maxSelectSize = size
+        }
 
         fun crop(options: CropImageOptions = cropImageOptions): Builder = apply {
             this.isCropEnabled = true
@@ -224,17 +226,15 @@ class PhotoPickerDialog private constructor(
         fun compress(
             @IntRange(from = 0, to = 100) quality: Int,
             format: Bitmap.CompressFormat = compressFormat,
-        ): Builder =
-            apply {
-                this.isCompressEnabled = true
-                this.compressQuality = quality
-                this.compressFormat = format
-            }
+        ): Builder = apply {
+            this.isCompressEnabled = true
+            this.compressQuality = quality
+            this.compressFormat = format
+        }
 
-        fun onSelectListener(onSelectListener: Click<ArrayList<PhotoItem>>): Builder =
-            apply {
-                this.onSelectListener = onSelectListener
-            }
+        fun onSelectListener(onSelectListener: Click<ArrayList<PhotoItem>>): Builder = apply {
+            this.onSelectListener = onSelectListener
+        }
 
 
         fun build(): PhotoPickerDialog {
