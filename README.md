@@ -21,12 +21,16 @@ photoPickerDialog.show(supportFragmentManager, null)
 ### Add Permissions
 
 ```xml
+
 <root>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 </root>
 ```
+
+<br>
+<br>
 
 ### override Strings
 
