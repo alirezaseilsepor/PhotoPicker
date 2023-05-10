@@ -12,7 +12,6 @@ import android.view.Window
 import android.widget.FrameLayout
 import androidx.core.view.ViewCompat
 import androidx.viewbinding.ViewBinding
-import app.king.mylibrary.ktx.getColorCompatAttr
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.shape.MaterialShapeDrawable
 
@@ -44,8 +43,7 @@ abstract class BaseDialogPicker<VB : ViewBinding> : BottomSheetDialogFragment() 
 
     private fun createMaterialShapeDrawable(bottomSheet: View): MaterialShapeDrawable {
         val currentMaterialShapeDrawable = bottomSheet.background as MaterialShapeDrawable
-        val color = requireContext().getColorCompatAttr(R.attr.PhotoPicker_colorBackgroundPicker)
-        currentMaterialShapeDrawable.fillColor = ColorStateList.valueOf(color)
+        currentMaterialShapeDrawable.fillColor = ColorStateList.valueOf(getBgColor())
         return currentMaterialShapeDrawable
     }
 
@@ -66,6 +64,7 @@ abstract class BaseDialogPicker<VB : ViewBinding> : BottomSheetDialogFragment() 
 
     abstract fun setup()
 
+    abstract fun getBgColor():Int
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -3,6 +3,8 @@ package ir.kingapp.photopicker
 
 import android.Manifest
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -248,6 +250,11 @@ class PhotoPickerDialog private constructor(
                 onSelectListener,
             )
         }
+    }
+
+    override fun getBgColor(): Int {
+        val colorDrawable = binding.recyclerView.background as? ColorDrawable
+        return colorDrawable?.color ?: Color.WHITE
     }
 
     override fun onDestroyView() {
