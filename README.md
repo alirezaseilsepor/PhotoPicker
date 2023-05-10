@@ -39,7 +39,9 @@
 
 ```xml
 <root>
+    
 <item name="PhotoPickerCustomStyle">@style/PhotoPickerCustomStyle</item>
+    
   <style name="PhotoPickerCustomStyle" parent="BasePhotoPickerStyle" >
          <item name="PhotoPicker_colorPrimary">#FF6E86</item>
         <item name="PhotoPicker_colorPrimaryText">#262626</item>
