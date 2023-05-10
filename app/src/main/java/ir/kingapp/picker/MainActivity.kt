@@ -2,8 +2,6 @@ package ir.kingapp.picker
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.canhub.cropper.CropImageOptions
-import com.canhub.cropper.CropImageView
 import ir.kingapp.photopicker.PhotoPickerDialog
 import ir.kingapp.picker.databinding.ActivityMainBinding
 

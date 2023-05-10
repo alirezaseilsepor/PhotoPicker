@@ -1,4 +1,5 @@
-### Install
+<br>
+
 ### implementation 'ir.king-app:photoPicker:1.0.0'
 
 ```kotlin
@@ -10,11 +11,15 @@
                     //list photo
                 }
                 .build()
-            photoPickerDialog.show(supportFragmentManager, null)
-```
 
+  photoPickerDialog.show(supportFragmentManager, null)
+```
+<br>
+<br>
+<br>
 
 ### override Strings
+
 ```xml
 <root>
 <string name="photo_picker_cancel">Cancel</string>
@@ -27,13 +32,12 @@
 <string name="photo_picker_without_name">without name</string>
 </root>
 ```
-
-\n
-/n
-
-
+<br>
+<br>
+<br>
 
 ### override theme
+
 ```xml
 <root>
 <item name="PhotoPickerCustomStyle">@style/PhotoPickerCustomStyle</item>
