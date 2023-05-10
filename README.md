@@ -1,6 +1,7 @@
-<br>
 
 ### implementation 'ir.king-app:photoPicker:1.0.0'
+
+<br>
 
 ```kotlin
  val photoPickerDialog = PhotoPickerDialog.Builder()
