@@ -14,7 +14,7 @@
 <string name="photo_picker_all_folder">all folder</string>
 <string name="photo_picker_select">Select</string>
 <string name="photo_picker_without_name">without name</string>
-<root>
+</root>
 ```
 
 
@@ -36,5 +36,5 @@
         <item name="PhotoPicker_colorBackgroundItem">#DEDEDE</item>
         <item name="PhotoPicker_colorStrokeItem">#DEDEDE</item>
     </style>
-<root>
+</root>
 ```
