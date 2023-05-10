@@ -1,7 +1,11 @@
 ### Install
 ### implementation 'ir.king-app:photoPicker:1.0.0'
 
-override Strings
+
+
+### override Strings
+```xml
+<root>
 <string name="photo_picker_cancel">Cancel</string>
 <string name="photo_picker_crop">crop</string>
 <string name="photo_picker_ok">OK</string>
@@ -10,9 +14,13 @@ override Strings
 <string name="photo_picker_all_folder">all folder</string>
 <string name="photo_picker_select">Select</string>
 <string name="photo_picker_without_name">without name</string>
+<root>
+```
 
 
-override theme
+### override theme
+```xml
+<root>
 <item name="PhotoPickerCustomStyle">@style/PhotoPickerCustomStyle</item>
   <style name="PhotoPickerCustomStyle" parent="BasePhotoPickerStyle" >
          <item name="PhotoPicker_colorPrimary">#FF6E86</item>
@@ -28,4 +36,5 @@ override theme
         <item name="PhotoPicker_colorBackgroundItem">#DEDEDE</item>
         <item name="PhotoPicker_colorStrokeItem">#DEDEDE</item>
     </style>
-
+<root>
+```
