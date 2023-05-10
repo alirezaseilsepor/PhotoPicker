@@ -1,8 +1,9 @@
 ### Install
 ### implementation 'ir.king-app:photoPicker:1.0.0'
-\n
-\n
-\n
+
+
+
+
 ### override Strings
 ```xml
 <root>
@@ -16,9 +17,10 @@
 <string name="photo_picker_without_name">without name</string>
 </root>
 ```
-\n
-\n
-\n
+
+
+
+
 
 ### override theme
 ```xml
