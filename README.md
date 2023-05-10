@@ -1,7 +1,17 @@
 ### Install
 ### implementation 'ir.king-app:photoPicker:1.0.0'
 
-
+```kotlin
+ val photoPickerDialog = PhotoPickerDialog.Builder()
+                .maxSelectSize(3)
+                .crop()
+                .compress(80)
+                .onSelectListener {
+                    //list photo
+                }
+                .build()
+            photoPickerDialog.show(supportFragmentManager, null)
+```
 
 
 ### override Strings
@@ -18,7 +28,8 @@
 </root>
 ```
 
-
+\n
+/n
 
 
 
