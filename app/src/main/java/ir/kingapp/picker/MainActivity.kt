@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnOpen.setOnClickListener {
             val photoPickerDialog = PhotoPickerDialog.Builder()
-                .maxSelectSize(3)
+                .maxSelectSize(1)
                 .crop(CropImageOptions().apply {
                     cropShape = CropImageView.CropShape.OVAL
                     cornerShape = CropImageView.CropCornerShape.OVAL

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="PhotoPickerCustomStyle" format="reference"/>
+    <attr name="PhotoPicker_colorPrimary" format="color"/>
+    <attr name="PhotoPicker_colorPrimaryText" format="color"/>
+    <attr name="PhotoPicker_colorSecondaryText" format="color"/>
+    <attr name="PhotoPicker_colorDisableText" format="color"/>
+    <attr name="PhotoPicker_colorButtonText" format="color"/>
+    <attr name="PhotoPicker_colorDisableButtonText" format="color"/>
+    <attr name="PhotoPicker_colorDisableButton" format="color"/>
+    <attr name="PhotoPicker_colorTintIcon" format="color"/>
+    <attr name="PhotoPicker_colorBackgroundPicker" format="color"/>
+    <attr name="PhotoPicker_colorBackgroundCrop" format="color"/>
+    <attr name="PhotoPicker_colorBackgroundItem" format="color"/>
+    <attr name="PhotoPicker_colorStrokeItem" format="color"/>
+
+</resources>

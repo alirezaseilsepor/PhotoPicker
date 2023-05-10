@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutDirection="ltr">
+    android:layoutDirection="ltr"
+    android:theme="?PhotoPickerCustomStyle">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pnl_action_bar"
@@ -24,8 +25,9 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="@string/photo_picker_all_folder"
-            android:textColor="@android:color/black"
+            android:textColor="?PhotoPicker_colorPrimaryText"
             app:drawableStartCompat="@drawable/ic_picker_arrow_down"
+            app:drawableTint="?PhotoPicker_colorPrimaryText"
             app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.button.MaterialButton
@@ -33,6 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:elevation="0dp"
             android:enabled="false"
             android:gravity="center"
             android:paddingStart="18dp"
@@ -40,10 +43,11 @@
             android:paddingEnd="18dp"
             android:paddingBottom="6dp"
             android:text="@string/photo_picker_select"
-            android:textColor="#fff"
+            android:textColor="@color/photo_picker_selector_color_button_text"
             android:textStyle="bold"
-            app:backgroundTint="@color/selector_color_button"
+            app:backgroundTint="@color/photo_picker_selector_color_button"
             app:cornerRadius="24dp"
+            app:elevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:background="#F1F1F1"
+        android:background="?PhotoPicker_colorBackgroundPicker"
         android:clipToPadding="false"
         android:minHeight="500dp"
         android:orientation="vertical"

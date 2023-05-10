@@ -8,6 +8,7 @@
 
 <androidx.appcompat.widget.LinearLayoutCompat
     android:orientation="vertical"
+    android:background="@color/photo_picker_selector_color_button_text"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toTopOf="@id/btn_open"
     android:layout_width="match_parent"

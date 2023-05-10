@@ -20,7 +20,7 @@ object MediaLoader {
         MediaStore.Images.Media.DATA,
         MediaStore.Images.Media.DISPLAY_NAME,
         MediaStore.Images.Media.SIZE,
-        MediaStore.Images.Media.DATE_TAKEN,
+        if (Build.VERSION.SDK_INT > 28) MediaStore.Images.Media.DATE_MODIFIED else MediaStore.Images.Media.DATE_TAKEN,
         MediaStore.Images.Media.DATE_ADDED,
         MediaStore.Images.Media.BUCKET_DISPLAY_NAME
     )
@@ -37,10 +37,10 @@ object MediaLoader {
 
             cursor?.use {
                 val idColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
-                val pathColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
+                val pathColumn = it.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
                 val nameColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME)
                 val sizeColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media.SIZE)
-                val dateTakenColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_TAKEN)
+                val dateTakenColumn = it.getColumnIndex(if (Build.VERSION.SDK_INT > 28) MediaStore.Images.Media.DATE_MODIFIED else MediaStore.Images.Media.DATE_TAKEN)
                 val dateAddColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_ADDED)
                 val folderColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME)
                 while (it.moveToNext()) {
@@ -80,7 +80,7 @@ object MediaLoader {
             val bundle = bundleOf(
                 ContentResolver.QUERY_ARG_OFFSET to offset,
                 ContentResolver.QUERY_ARG_LIMIT to limit,
-                ContentResolver.QUERY_ARG_SORT_COLUMNS to arrayOf(MediaStore.Images.Media.DATE_ADDED),
+                ContentResolver.QUERY_ARG_SORT_COLUMNS to arrayOf(if (Build.VERSION.SDK_INT > 28) MediaStore.Images.Media.DATE_MODIFIED else MediaStore.Images.Media.DATE_TAKEN),
                 ContentResolver.QUERY_ARG_SORT_DIRECTION to ContentResolver.QUERY_SORT_DIRECTION_DESCENDING
             )
             contentResolver.query(
@@ -95,7 +95,7 @@ object MediaLoader {
                 projection,
                 null,
                 null,
-                "${MediaStore.Images.Media.DATE_ADDED} DESC LIMIT $limit OFFSET $offset",
+                "${(MediaStore.Images.Media.DATE_TAKEN)} DESC LIMIT $limit OFFSET $offset",
                 null
             )
         }

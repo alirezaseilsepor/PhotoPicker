@@ -3,7 +3,24 @@
     <style name="Base.Theme.Picker" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="PhotoPickerCustomStyle">@style/PhotoPickerCustomStyle</item>
     </style>
 
     <style name="Theme.Picker" parent="Base.Theme.Picker" />
+
+
+    <style name="PhotoPickerCustomStyle" parent="BasePhotoPickerStyle" >
+        <item name="PhotoPicker_colorPrimary">#210258</item>
+        <item name="PhotoPicker_colorPrimaryText">#979797</item>
+        <item name="PhotoPicker_colorSecondaryText">#757575</item>
+        <item name="PhotoPicker_colorDisableText">#ACACAC</item>
+        <item name="PhotoPicker_colorButtonText">#E1E1E1</item>
+        <item name="PhotoPicker_colorDisableButtonText">#ACACAC</item>
+        <item name="PhotoPicker_colorDisableButton">#454545</item>
+        <item name="PhotoPicker_colorTintIcon">#FFFFFF</item>
+        <item name="PhotoPicker_colorBackgroundPicker">#0C0C0C</item>
+        <item name="PhotoPicker_colorBackgroundCrop">#000000</item>
+        <item name="PhotoPicker_colorBackgroundItem">#2B2B2B</item>
+        <item name="PhotoPicker_colorStrokeItem">#2B2B2B</item>
+    </style>
 </resources>

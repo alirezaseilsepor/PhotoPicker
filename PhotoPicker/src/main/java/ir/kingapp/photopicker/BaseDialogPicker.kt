@@ -1,6 +1,7 @@
 package ir.kingapp.photopicker
 
 import android.app.Dialog
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -8,10 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.FrameLayout
+import androidx.core.view.ViewCompat
 import androidx.viewbinding.ViewBinding
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import app.king.mylibrary.ktx.getColorCompatAttr
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.shape.MaterialShapeDrawable
+
 
 abstract class BaseDialogPicker<VB : ViewBinding> : BottomSheetDialogFragment() {
 
@@ -28,12 +32,22 @@ abstract class BaseDialogPicker<VB : ViewBinding> : BottomSheetDialogFragment() 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCanceledOnTouchOutside(true)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        if (dialog is BottomSheetDialog) {
-            dialog.behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        dialog.setOnShowListener {
+            val bottomSheet =
+                dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout
+            val newMaterialShapeDrawable: MaterialShapeDrawable =
+                createMaterialShapeDrawable(bottomSheet)
+            ViewCompat.setBackground(bottomSheet, newMaterialShapeDrawable)
         }
         return dialog
     }
 
+    private fun createMaterialShapeDrawable(bottomSheet: View): MaterialShapeDrawable {
+        val currentMaterialShapeDrawable = bottomSheet.background as MaterialShapeDrawable
+        val color = requireContext().getColorCompatAttr(R.attr.PhotoPicker_colorBackgroundPicker)
+        currentMaterialShapeDrawable.fillColor = ColorStateList.valueOf(color)
+        return currentMaterialShapeDrawable
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -127,7 +127,9 @@ class PhotoPickerAdapter(private val maxSelectSize: Int) :
         private fun animScale(view: View, isSelected: Boolean, isAnimation: Boolean) {
             var duration = 200
             if (!isAnimation) duration = 0
-            val toScale: Float = if (isSelected) 0.75f else 1.0f
+            var toScale = if (isSelected) 0.75f else 1.0f
+            if (isSelected && isSingleSelect())
+                toScale = 0.9f
             ViewCompat.animate(view)
                 .setDuration(duration.toLong())
                 .scaleX(toScale)

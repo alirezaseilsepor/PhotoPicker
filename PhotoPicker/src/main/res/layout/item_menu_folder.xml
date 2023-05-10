@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.AppCompatTextView
+    android:theme="?PhotoPickerCustomStyle"
     android:layout_marginStart="8dp"
+    android:background="?PhotoPicker_colorBackgroundPicker"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:textColor="#6C6C6C"
+    android:textColor="?PhotoPicker_colorSecondaryText"
     android:id="@+id/tv_name"
     android:gravity="center"
     android:layout_width="match_parent"
