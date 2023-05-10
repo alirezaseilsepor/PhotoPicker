@@ -17,7 +17,6 @@
 ```
 <br>
 <br>
-<br>
 
 ### override Strings
 
@@ -33,7 +32,6 @@
 <string name="photo_picker_without_name">without name</string>
 </root>
 ```
-<br>
 <br>
 <br>
 
