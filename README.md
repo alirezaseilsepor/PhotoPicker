@@ -1,4 +1,4 @@
-### implementation 'ir.king-app:photoPicker:1.0.1'
+### implementation 'ir.king-app:photoPicker:1.0.2'
 
 <br>
 
