@@ -4,6 +4,8 @@ import android.app.Dialog
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,17 +36,18 @@ abstract class BaseDialogPicker<VB : ViewBinding> : BottomSheetDialogFragment() 
         dialog.setOnShowListener {
             val bottomSheet =
                 dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout
-            val newMaterialShapeDrawable: MaterialShapeDrawable =
-                createMaterialShapeDrawable(bottomSheet)
+            val newMaterialShapeDrawable = createMaterialShapeDrawable(bottomSheet)
             ViewCompat.setBackground(bottomSheet, newMaterialShapeDrawable)
         }
         return dialog
     }
 
-    private fun createMaterialShapeDrawable(bottomSheet: View): MaterialShapeDrawable {
-        val currentMaterialShapeDrawable = bottomSheet.background as MaterialShapeDrawable
-        currentMaterialShapeDrawable.fillColor = ColorStateList.valueOf(getBgColor())
-        return currentMaterialShapeDrawable
+    private fun createMaterialShapeDrawable(bottomSheet: View): Drawable? {
+        val currentMaterialShapeDrawable = bottomSheet.background as? MaterialShapeDrawable
+        val currentMaterialShapeDrawable2 = bottomSheet.background as? GradientDrawable
+        currentMaterialShapeDrawable?.fillColor = ColorStateList.valueOf(getBgColor())
+        currentMaterialShapeDrawable2?.color = ColorStateList.valueOf(getBgColor())
+        return currentMaterialShapeDrawable ?: currentMaterialShapeDrawable2
     }
 
     override fun onCreateView(
@@ -64,7 +67,7 @@ abstract class BaseDialogPicker<VB : ViewBinding> : BottomSheetDialogFragment() 
 
     abstract fun setup()
 
-    abstract fun getBgColor():Int
+    abstract fun getBgColor(): Int
 
     override fun onDestroyView() {
         super.onDestroyView()

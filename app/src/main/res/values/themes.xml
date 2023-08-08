@@ -4,6 +4,7 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="PhotoPickerCustomStyle">@style/PhotoPickerCustomStyle</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheetDialogStyle</item>
     </style>
 
     <style name="Theme.Picker" parent="Base.Theme.Picker" />
@@ -18,9 +19,20 @@
         <item name="PhotoPicker_colorDisableButtonText">#ACACAC</item>
         <item name="PhotoPicker_colorDisableButton">#DEDEDE</item>
         <item name="PhotoPicker_colorTintIcon">#FFFFFF</item>
-        <item name="PhotoPicker_colorBackgroundPicker">#CDDC39</item>
+        <item name="PhotoPicker_colorBackgroundPicker">#00F6FD</item>
         <item name="PhotoPicker_colorBackgroundCrop">#000000</item>
         <item name="PhotoPicker_colorBackgroundItem">#DEDEDE</item>
         <item name="PhotoPicker_colorStrokeItem">#DEDEDE</item>
+    </style>
+
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/shape_rect_half_radius_top_gray</item>
+    </style>
+
+    <style name="BottomSheetDialogStyle" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
 </resources>
