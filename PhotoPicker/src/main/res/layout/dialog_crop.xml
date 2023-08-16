@@ -54,5 +54,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/toolbar" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_rotate"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        app:backgroundTint="?PhotoPicker_colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_rotate_right_24"
+        app:tint="?PhotoPicker_colorTintIcon" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,6 +33,9 @@ class CropDialog(
                 btnCrop.isEnabled = false
                 cropImageView.croppedImageAsync(saveCompressQuality = 100)
             }
+            btnRotate.setOnSafeClickListener {
+                cropImageView.rotateImage(-cropImageOptions.rotationDegrees)
+            }
             cropImageView.setOnCropImageCompleteListener { _, result ->
                 if (result.isSuccessful) {
                     val uri = result.originalUri!!
